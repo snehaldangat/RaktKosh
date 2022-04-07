@@ -1,17 +1,17 @@
 import httpClient from './http-common';
-//const baseURL='http://localhost:8080/commondata/'
+//const baseURL='http://localhost:9090/commondata/'
 const getAllStates = () => {
-  return httpClient.get(`http://localhost:8080/commondata/allstates`);
+  return httpClient.get(`http://localhost:9090/commondata/allstates`);
 };
 
 
 const getAllDistrictsByStateId = (stateId) => {
-    return httpClient.get(`http://localhost:8080/commondata/districts/${stateId}`);
+    return httpClient.get(`http://localhost:9090/commondata/districts/${stateId}`);
   };
 
-  //http://localhost:8080/commondata/cities/'+districtId
+  //http://localhost:9090/commondata/cities/'+districtId
   const getAllCitiesByDistricId = (districtId) => {
-    return httpClient.get(`http://localhost:8080/commondata/cities/${districtId}`);
+    return httpClient.get(`http://localhost:9090/commondata/cities/${districtId}`);
   };
 
 // const create = (data) => {
