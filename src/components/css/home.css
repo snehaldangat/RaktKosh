@@ -91,3 +91,10 @@ p{
     text-align: center;
     color: black;
 }
+
+.sliderimg{
+    width: 100%;
+    height: 500px;
+object-fit: cover;
+margin-top: 50px;
+}

@@ -1,4 +1,6 @@
+import AliceCarousel from 'react-alice-carousel';
 
+import "react-alice-carousel/lib/alice-carousel.css";
 import React, { Component } from 'react'
 import Container from 'react-bootstrap/Container'
 import "./css/image.css";
@@ -7,6 +9,10 @@ import "./css/table.css";
 
 import img2 from"../images/blood.PNG";
 import HomeTable from './HomeTable';
+
+import blood from "../images/blood.PNG";
+import image1 from "../images/image1.jpg";
+import image2 from "../images/image2.jpg";
 
 export class Home extends Component {
     fun=()=> {
@@ -24,7 +30,12 @@ export class Home extends Component {
       
      
       <>
-      
+      <AliceCarousel autoPlay autoPlayInterval={"1000"} >
+      <p><img src="http://www.student.chula.ac.th/~60370416/images/banner.jpg" className="sliderimg" /></p>
+      <p><img src="https://indiancc.mygov.in/wp-content/uploads/2021/08/mygov-9999999992095197695-1024x390.jpg" className="sliderimg" /></p>
+      <p><img src="https://gumlet.assettype.com/thebridgechronicle%2Fimport%2Fs3fs-public%2Fnews-story%2Fcover-images%2F3Blood_0.jpg?auto=format%2Ccompress&fit=max&format=webp&w=768&dpr=1.0" className="sliderimg" /></p>
+
+      </AliceCarousel>
       <HomeTable /> 
       
 

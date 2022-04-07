@@ -8,4 +8,13 @@ const getVerifyEmail = (email) => {
     return httpClient.get(`http://localhost:9090/bank/verifycontact/${mobile}`);
   };
 
-  export default { getVerifyEmail, getVerifyMobile};
+
+  const getAllBank = () => {
+    return httpClient.get(`http://localhost:9090/bank/info`);
+  };
+
+  const getAllPendingReqBank = () => {
+    return httpClient.get(`http://localhost:9090/bank/pendinginfo`);
+  };
+
+  export default { getVerifyEmail, getVerifyMobile, getAllBank, getAllPendingReqBank};
