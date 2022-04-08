@@ -2,9 +2,8 @@
 import React, { Component } from 'react'
 import axios from 'axios'
 import { Form, Button, Table } from 'react-bootstrap'
-import '../css/common.css'
 import { Link } from 'react-router-dom'
-class BloodStock extends Component {
+class StockUpdate extends Component {
     constructor(props) {
         super(props)
 
@@ -102,14 +101,14 @@ class BloodStock extends Component {
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td>10</td>
-                                    <td>10</td>
-                                    <td>10</td>
-                                    <td>10</td>
-                                    <td>10</td>
-                                    <td>10</td>
-                                    <td>10</td>
-                                    <td>10</td>
+                                    <td contentEditable={true} suppressContentEditableWarning={true}>10</td>
+                                    <td contentEditable={true} suppressContentEditableWarning={true}>10</td>
+                                    <td contentEditable={true} suppressContentEditableWarning={true}>10</td>
+                                    <td contentEditable={true} suppressContentEditableWarning={true}>10</td>
+                                    <td contentEditable={true} suppressContentEditableWarning={true}>10</td>
+                                    <td contentEditable={true} suppressContentEditableWarning={true}>10</td>
+                                    <td contentEditable={true} suppressContentEditableWarning={true}>10</td>
+                                    <td contentEditable={true} suppressContentEditableWarning={true}>10</td>
                                 </tr>
                             </tbody>
                         </Table>
@@ -118,8 +117,8 @@ class BloodStock extends Component {
 
                             </div>
                             <div className="col m-4">
-                                <Link to="/stockUpdate">
-                                    <Button variant="primary" type="submit" >Update </Button>
+                                <Link to="/bank/bloodStock">
+                                    <Button variant="success" type="submit" >Save </Button>
                                 </Link>
                             </div>
                             <div className="col ">
@@ -133,4 +132,4 @@ class BloodStock extends Component {
     }
 }
 
-export default BloodStock
+export default StockUpdate

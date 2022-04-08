@@ -22,7 +22,7 @@ import AdminHome from './components/admin/AdminHome';
 import { BrowserRouter } from 'react-router-dom';
 import { FAQ } from './components/FAQ';
 import React, { Component } from 'react'
-import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
+
 import {BasicTable} from './components/admin/table/BasicTable'
 import {SortingTable} from './components/admin/table/SortingTable'
 import {FilteringTable} from './components/admin/table/FilteringTable'
@@ -30,12 +30,13 @@ import {PaginationTable} from './components/admin/table/PaginationTable'
 import {RowSelection} from './components/admin/table/RowSelection'
 import { RowSel } from './components/admin/table/RowSel';
 import AdminLogin from './components/admin/AdminLogin';
+import ToastDemo from './components/ToastDemo';
+import StockUpdate from './components/StockUpdate';
 class App extends Component {
   
 
 
   render() {
-  
     return (
       <>
       <Navibar/>
@@ -57,7 +58,7 @@ class App extends Component {
         <Route path='/bank/campRegister' element={<CampRegister/>}></Route> 
         <Route path='/bank/bankHome' element={<BankHome/>}></Route> 
         <Route path='/bank/bloodStock' element={<BloodStock/>}></Route>
-        <Route path='/bank/login' element={<Login/>}></Route>
+        <Route path='/login' element={<Login/>}></Route>
         <Route path='/bank/register' element={<Register/>}></Route>
 
         <Route path='/admin/basictable' element={<BasicTable/>}></Route>
@@ -68,9 +69,18 @@ class App extends Component {
         <Route path='/admin/rowsel' element={<RowSel/>}></Route>
 
         <Route path='/admin/adminLogin' element={<AdminLogin/>}></Route>
+        
+          <Route path='/admin/adminHome' element={<AdminHome/>}></Route>
+
+        
+
+        <Route path='/toastDemo' element={<ToastDemo info="Hello... KING_SH@RK"/>}></Route>
         <Route path='/admin/adminHome' element={<AdminHome/>}></Route>
+
+        <Route path='/stockUpdate' element={<StockUpdate/>}></Route>
       </Routes>
       </BrowserRouter>
+      
       </>
     )
   }
