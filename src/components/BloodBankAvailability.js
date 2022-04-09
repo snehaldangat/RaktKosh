@@ -140,7 +140,7 @@ class BloodBankAvailability extends Component {
 
           //axios.get('http://localhost:9090/commondata/cities/'+districtId)
           commonService.getAllCitiesByDistricId(districtId)
-          .then(response=>{
+                   .then(response=>{
           this.setState({citiesdata:response.data})
           console.log(this.state.citiesdata);
           })
