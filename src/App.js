@@ -10,6 +10,7 @@ import BloodBankAvailability from './components/BloodBankAvailability';
 import DonorLogin from './components/donor/DonorLogin';
 import DonorRegister from './components/donor/DonorRegister';
 import DonorAppointment from './components/donor/DonorAppointment';
+import DonorHome from './components/donor/DonorHome';
 
 import BloodStock from './components/bank/BloodStock';
 import CampSchedule from './components/bank/CampSchedule';
@@ -31,7 +32,7 @@ import {RowSelection} from './components/admin/table/RowSelection'
 import { RowSel } from './components/admin/table/RowSel';
 import AdminLogin from './components/admin/AdminLogin';
 import ToastDemo from './components/ToastDemo';
-import StockUpdate from './components/StockUpdate';
+import StockUpdate from './components/bank/StockUpdate';
 class App extends Component {
   
 
@@ -71,13 +72,14 @@ class App extends Component {
         <Route path='/admin/adminLogin' element={<AdminLogin/>}></Route>
         
           <Route path='/admin/adminHome' element={<AdminHome/>}></Route>
+          <Route path='/donor/DonorHome' element={<DonorHome/>}></Route>
 
         
 
         <Route path='/toastDemo' element={<ToastDemo info="Hello... KING_SH@RK"/>}></Route>
         <Route path='/admin/adminHome' element={<AdminHome/>}></Route>
 
-        <Route path='/stockUpdate' element={<StockUpdate/>}></Route>
+        <Route path='/bank/updateStock' element={<StockUpdate/>}></Route>
       </Routes>
       </BrowserRouter>
       

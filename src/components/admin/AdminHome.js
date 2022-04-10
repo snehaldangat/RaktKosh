@@ -6,7 +6,7 @@ import bankService from "../../service/bankService";
 import adminService from "../../service/adminService";
 import { PaginationTable } from "./table/PaginationTable";
 import commonService from "../../service/common.service";
-import { Navigate } from "react-router-dom";
+import { Link,Navigate } from "react-router-dom";
 //import {selectedArray} from './table/columns/selectedArray'
 class AdminHome extends Component {
     constructor(props) {
@@ -24,7 +24,18 @@ class AdminHome extends Component {
     
 
     componentDidMount() {
-        console.log(window.localStorage.getItem("loginUserEmail"))
+        //console.log(window.localStorage.getItem("loginUserEmail"))
+        // const email=window.localStorage.getItem("loginUserEmail")
+
+        // const role=window.localStorage.getItem("loginUserRole")
+        const email=sessionStorage.getItem("loginUserEmail")
+        const role=sessionStorage.getItem("loginUserRole")
+        console.log(email+""+role)
+        if(role!=='ADMIN'){
+                this.setState({
+                    redirect: "/" 
+                })
+            }
         commonService.getSessionUser()
                 .then((response) => {
                     console.log("componentDidMount");
@@ -238,7 +249,7 @@ class AdminHome extends Component {
                 
         if (this.state.redirect) {
             return  <Navigate to={this.state.redirect} />
-        }
+        } 
 
         return (
             
@@ -284,7 +295,16 @@ class AdminHome extends Component {
                 <div>
                     <PaginationTable MOCK_DATA={statesdata} COLUMNS={COLUMNS}/>
                 </div>
+                <div class="col-md-12 text-center">
+                <Link to="/">
+                <Button className="m-4"variant="primary" type="submit">
+                        Logout
+                    </Button>
+                    </Link>
+                    </div>
             </div>
+
+            
         );
     }
 }

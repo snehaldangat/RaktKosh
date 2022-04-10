@@ -1,133 +1,526 @@
-
 import React, { Component } from 'react'
+import { Form, Button } from "react-bootstrap";
+import { Link } from 'react-router-dom';
 import axios from 'axios'
-import { Form, Button, Table } from 'react-bootstrap'
-import '../css/common.css'
-import { Link } from 'react-router-dom'
+import validator from 'validator'
+import './CampRegister.css'
+import { TimePickerComponent } from "@syncfusion/ej2-react-calendars";
+import stockService from '../../service/stockService';
+import { Navigate } from "react-router-dom";
+
+
+import { toast } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
+
+
 class BloodStock extends Component {
     constructor(props) {
         super(props)
 
+
+
         this.state = {
-            statesdata: [],
-            districtsdata: []
-        }
-        this.stateHandler = this.stateHandler.bind(this)
+            apositive:sessionStorage.getItem("apositive"),
+            isValidAP:'',
+            anegative:sessionStorage.getItem("anegative"),
+            isValidAN:'',
+            bpositive:sessionStorage.getItem("bpositive"),
+            isValidBP:'',
+            bnegative:sessionStorage.getItem("bnegative"),
+            isValidBN:'',
+            abPositive:sessionStorage.getItem("abPositive"),
+            isValidABP:'',
+            abNegative:sessionStorage.getItem("abNegative"),
+            isValidABN:'',
+            opositive:sessionStorage.getItem("opositive"),
+            isValidOP:'',
+            onegative:sessionStorage.getItem("onegative"),
+            isValidON:'',
+            bank:[],
+            redirect:'',
+            errors: {
+            },
+            succ: {
+            }
+        };
 
-
+        this.changeHandlerAP = this.changeHandlerAP.bind(this);
+        this.changeHandlerAN = this.changeHandlerAN.bind(this);
+        this.changeHandlerBP = this.changeHandlerBP.bind(this);
+        this.changeHandlerABP = this.changeHandlerABP.bind(this);
+        this.changeHandlerOP = this.changeHandlerOP.bind(this);
+        this.changeHandlerBN = this.changeHandlerBN.bind(this);
+        this.changeHandlerABN = this.changeHandlerABN.bind(this);
+        this.changeHandlerON = this.changeHandlerON.bind(this);
+        
     }
 
+    changeHandlerAP = event => {
+        console.log(event.target.value + 'changeHandler' + event.target.name);
+        this.setState({ apositive: event.target.value});
+        // const apositive=this.state.apositive
+        // const newErrors = {};
+        // let flag=true
+        // if(apositive===' '){
+        //     newErrors.apositive = ' Cannot be blank!'
+        //     console.log("blank"+apositive);
+        //     flag=false;
+        // }
+        // else if(apositive<0){
+        //     newErrors.apositive = ' Invalid!'
+        //     console.log("Invalid"+apositive);
+        //     flag=false;
+        // }
+
+
+        // if(flag){
+        //     this.setState({
+        //         isValidAP: true
+        //    })
+        //   }
+        //   else{
+        //     this.setState({
+        //       errors: newErrors
+        //    })
+        //   }
+
+
+    };
+
+
+
+    changeHandlerAN = event => {
+        console.log(event.target.value + 'changeHandler' + event.target.name);
+        this.setState({ anegative: event.target.value});
+        // const anegative=this.state.anegative
+        // const newErrors = {};
+        // let flag=true
+        // if(anegative===''){
+        //     newErrors.anegative = ' Cannot be blank!'
+        //     flag=false;
+        // }
+
+        // if(anegative<0){
+        //     newErrors.anegative = ' Invalid!'
+        //     flag=false;
+        // }
+
+
+        // if(flag){
+        //     this.setState({
+        //         isValidAN: true
+        //    })
+        //   }
+        //   else{
+        //     this.setState({
+        //       errors: newErrors
+        //    })
+        //   }
+
+
+    };
+
+    changeHandlerBP = event => {
+        console.log(event.target.value + 'changeHandler' + event.target.name);
+        this.setState({ bpositive: event.target.value});
+        // const apositive=this.state.apositive
+        // const newErrors = {};
+        // let flag=true
+        // if(apositive===''){
+        //     newErrors.apositive = ' Cannot be blank!'
+        //     flag=false;
+        // }
+
+        // if(apositive<0){
+        //     newErrors.apositive = ' Invalid!'
+        //     flag=false;
+        // }
+
+
+        // if(flag){
+        //     this.setState({
+        //         isValidAP: true
+        //    })
+        //   }
+        //   else{
+        //     this.setState({
+        //       errors: newErrors
+        //    })
+        //   }
+
+
+    };
+
+
+    changeHandlerBN = event => {
+        console.log(event.target.value + 'changeHandler' + event.target.name);
+        this.setState({ bnegative: event.target.value});
+        // const apositive=this.state.apositive
+        // const newErrors = {};
+        // let flag=true
+        // if(apositive===''){
+        //     newErrors.apositive = ' Cannot be blank!'
+        //     flag=false;
+        // }
+
+        // if(apositive<0){
+        //     newErrors.apositive = ' Invalid!'
+        //     flag=false;
+        // }
+
+
+        // if(flag){
+        //     this.setState({
+        //         isValidAP: true
+        //    })
+        //   }
+        //   else{
+        //     this.setState({
+        //       errors: newErrors
+        //    })
+        //   }
+
+
+    };
+
+    changeHandlerABP = event => {
+        console.log(event.target.value + 'changeHandler' + event.target.name);
+        this.setState({ abPositive: event.target.value});
+        // const apositive=this.state.apositive
+        // const newErrors = {};
+        // let flag=true
+        // if(apositive===''){
+        //     newErrors.apositive = ' Cannot be blank!'
+        //     flag=false;
+        // }
+
+        // if(apositive<0){
+        //     newErrors.apositive = ' Invalid!'
+        //     flag=false;
+        // }
+
+
+        // if(flag){
+        //     this.setState({
+        //         isValidAP: true
+        //    })
+        //   }
+        //   else{
+        //     this.setState({
+        //       errors: newErrors
+        //    })
+        //   }
+
+
+    };
+
+    changeHandlerABN = event => {
+        console.log(event.target.value + 'changeHandler' + event.target.name);
+        this.setState({ abNegative: event.target.value});
+        // const apositive=this.state.apositive
+        // const newErrors = {};
+        // let flag=true
+        // if(apositive===''){
+        //     newErrors.apositive = ' Cannot be blank!'
+        //     flag=false;
+        //     console.log("blank"+apositive);
+        // }
+
+        // if(apositive<0){
+        //     newErrors.apositive = ' Invalid!'
+        //     flag=false;
+        //     console.log("Invalid"+apositive);
+        // }
+
+
+        // if(flag){
+        //     this.setState({
+        //         isValidAP: true
+        //    })
+        //   }
+        //   else{
+        //     this.setState({
+        //       errors: newErrors
+        //    })
+        //   }
+
+
+    };
+
+
+    changeHandlerOP = event => {
+        console.log(event.target.value + 'changeHandler' + event.target.name);
+        this.setState({ opositive: event.target.value});
+        // const apositive=this.state.apositive
+        // const newErrors = {};
+        // let flag=true
+        // if(apositive===''){
+        //     newErrors.apositive = ' Cannot be blank!'
+        //     flag=false;
+        // }
+
+        // if(apositive<0){
+        //     newErrors.apositive = ' Invalid!'
+        //     flag=false;
+        // }
+
+
+        // if(flag){
+        //     this.setState({
+        //         isValidAP: true
+        //    })
+        //   }
+        //   else{
+        //     this.setState({
+        //       errors: newErrors
+        //    })
+        //   }
+
+
+    };
+
+
+    changeHandlerON = event => {
+        console.log(event.target.value + 'changeHandler' + event.target.name);
+        this.setState({ onegative: event.target.value });
+        // const apositive=this.state.apositive
+        // const newErrors = {};
+        // let flag=true
+        // if(apositive===''){
+        //     newErrors.apositive = ' Cannot be blank!'
+        //     flag=false;
+        // }
+
+        // if(apositive<0){
+        //     newErrors.apositive = ' Invalid!'
+        //     flag=false;
+        // }
+
+
+        // if(flag){
+        //     this.setState({
+        //         isValidAP: true
+        //    })
+        //   }
+        //   else{
+        //     this.setState({
+        //       errors: newErrors
+        //    })
+        //   }
+
+
+    };
+
+
+
+   
+    handleSubmit = (event) => {
+
+       const { apositive,
+        anegative,
+        bpositive,
+        bnegative,
+        abPositive,
+        abNegative,
+        opositive,
+        onegative}= this.state;
+        //let data={}
+        const email=sessionStorage.getItem("loginUserEmail")
+        
+        //console.log(data);
+        stockService.getByEmail(email)
+        .then(response=>{
+        console.log("componentDidMount");
+        console.log(response.data.bank);
+        ///id=response.data.bank.id;
+         this.setState({bank:response.data.bank})
+        // console.log(this.state.districtsdata);
+         const data={
+            "id":response.data.id,
+            "bank":response.data.bank,
+            "abPositive": abPositive,
+            "abNegative": abNegative,
+            "onegative": onegative,
+            "anegative": anegative ,
+            "bpositive": bpositive,
+            "bnegative": bnegative,
+            "apositive": apositive,
+            "opositive": opositive,
+            
+        } 
+        console.log(data)
+            stockService.updateStock(data)
+            .then(response=>{
+                console.log(response.data);
+                toast.success("Update Successfully");
+                    
+                this.setState({ redirect: "/bank/bankHome" });
+            })
+            .catch(error=>{
+                console.log(error);
+            })
+        })
+        .catch(error=>{
+            console.log(error);
+        })
+        
+        event.preventDefault();
+    }
+
+    findFormErrors = () => {
+        
+    }
 
     componentDidMount() {
-        if (this.state.statesdata.length === 0) {
-            axios.get('http://localhost:9090/commondata/statesAndDistrict')
-                .then(response => {
-                    console.log("componentDidMount");
-                    console.log(response.data);
-                    this.setState({ statesdata: response.data })
-                    console.log(this.state.statesdata);
-                })
-                .catch(error => {
-                    console.log(error);
-                })
-        }
-        console.log('out')
+       
 
     }
 
-    stateHandler(e) {
-        console.log(e.target.value);
-        if (e.target.value >= 0) {
-            this.setState({ districtsdata: this.state.statesdata[e.target.value - 1].districts });
-            console.log(this.state.districtsdata);
-        }
-        else {
-            this.setState({ districtsdata: [] });
-        }
 
-    }
+
+
 
 
     render() {
 
-        const { statesdata, districtsdata } = this.state;
-        console.log(districtsdata);
-        let statesList = statesdata.length > 0
-            && statesdata.map((item, i) => {
-                return (
 
-                    <option key={i} value={item.id}>{item.name}</option>
-                )
-            }, this);
+        const { isValidAP, errors, isValidBP, isValidBN, isValidABP, isValidABN, isValidAN, isValidOP, isValidON, } = this.state;
+        
+            // this.setState({
+            //     apositive:sessionStorage.getItem("apositive")
+            // })
+            // const apositive=sessionStorage.getItem("apositive");
+            // console.log(apositive);
 
-        let districtsList = districtsdata.length > 0
-            && districtsdata.map((item, i) => {
-                return (
-
-                    <option key={i} value={item.id}>{item.name}</option>
-                )
-            }, this);
-
-
-
-
-
+            if (this.state.redirect) {
+                return  <Navigate to={this.state.redirect} />
+              }
         return (
-            <div>
-                <div className="container bg-dark text-white text-center mt-4">
-                    <div className="row">
-                        <div className="col ">
-
-                        </div>
-                        <div className="col-10 m-3">
-                            <h1>Blood Stock</h1>
-                        </div>
-                        <div className="col ">
-
-                        </div>
+            
+            <div className="container bg-dark text-white text-center col-10 font-weight-bold">
+                <div className="row">
+                    <div className="col ">
                     </div>
-                    <div className="row">
-                        <Table striped bordered hover variant="dark" className='mb-3'>
-                            <thead>
-                                <tr>
-                                    <th>A+</th>
-                                    <th>A-</th>
-                                    <th>B+</th>
-                                    <th>B-</th>
-                                    <th>AB+</th>
-                                    <th>AB-</th>
-                                    <th>O+</th>
-                                    <th>O-</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>10</td>
-                                    <td>10</td>
-                                    <td>10</td>
-                                    <td>10</td>
-                                    <td>10</td>
-                                    <td>10</td>
-                                    <td>10</td>
-                                    <td>10</td>
-                                </tr>
-                            </tbody>
-                        </Table>
-                        <div className="row">
-                            <div className="col ">
-
-                            </div>
-                            <div className="col m-4">
-                                <Link to="/stockUpdate">
-                                    <Button variant="primary" type="submit" >Update </Button>
-                                </Link>
-                            </div>
-                            <div className="col ">
-
-                            </div>
-                        </div>
+                    <div className="col-10 ">
+                        <h1>Blood Stock</h1>
+                    </div>
+                    <div className="col ">
                     </div>
                 </div>
+                <Form noValidate onSubmit={this.handleSubmit}>
+                    <div className="row">
+                        <div className="col"></div>
+                        <div className="col-md-4">
+                            <Form.Group className="m-2" controlId="formBasicCampName">
+                                <Form.Label>A+</Form.Label>
+                                <Form.Control type="number"
+                                    name='campName' value={this.state.apositive} onChange={this.changeHandlerAP}
+                                    isValid={isValidAP} isInvalid={!!errors.apositive} required />
+                                <Form.Control.Feedback ><b>Looks good!</b></Form.Control.Feedback>
+                                <Form.Control.Feedback type="invalid"><b>{errors.apositive}</b></Form.Control.Feedback>
+                            </Form.Group>
+                        </div>
+                        <div className="col-md-4">
+                            <Form.Group className="m-2" controlId="formBasicCampName">
+                                <Form.Label>A-</Form.Label>
+                                <Form.Control type="text"
+                                    name='campName'  value={this.state.anegative} onChange={this.changeHandlerAN}
+                                    isValid={isValidAN} isInvalid={!!errors.anegative} required />
+                                <Form.Control.Feedback ><b>Looks good!</b></Form.Control.Feedback>
+                                <Form.Control.Feedback type="invalid"><b>{errors.anegative}</b></Form.Control.Feedback>
+                            </Form.Group>
+                        </div> 
+                        <div className="col"></div>
+                    </div>
+                    <div className="row">
+                        <div className="col"></div>
+                        <div className="col-md-4">
+                            <Form.Group className="m-2" controlId="formBasicCampName">
+                                <Form.Label>B+</Form.Label>
+                                <Form.Control type="text"
+                                    name='campName' onChange={this.changeHandlerBP} value={this.state.bpositive}
+                                    isValid={isValidBP} isInvalid={!!errors.bpositive} required />
+                                <Form.Control.Feedback ><b>Looks good!</b></Form.Control.Feedback>
+                                <Form.Control.Feedback type="invalid"><b>{errors.bpositive}</b></Form.Control.Feedback>
+                            </Form.Group>
+                        </div>
+                        <div className="col-md-4">
+                            <Form.Group className="m-2" controlId="formBasicCampName">
+                                <Form.Label>B-</Form.Label>
+                                <Form.Control type="text"
+                                    name='campName' onChange={this.changeHandlerBN} value={this.state.bnegative}
+                                    isValid={isValidBN} isInvalid={!!errors.bnegative} required />
+                                <Form.Control.Feedback ><b>Looks good!</b></Form.Control.Feedback>
+                                <Form.Control.Feedback type="invalid"><b>{errors.bnegative}</b></Form.Control.Feedback>
+                            </Form.Group>
+                        </div>
+                        <div className="col"></div>
+                    </div>
+                    <div className="row">
+                        <div className="col"></div>
+                        <div className="col-md-4">
+                            <Form.Group className="m-2" controlId="formBasicCampName">
+                                <Form.Label>AB+</Form.Label>
+                                <Form.Control type="text"
+                                    name='campName' onChange={this.changeHandlerABP} value={this.state.abPositive}
+                                    isValid={isValidABP} isInvalid={!!errors.abPositive} required />
+                                <Form.Control.Feedback ><b>Looks good!</b></Form.Control.Feedback>
+                                <Form.Control.Feedback type="invalid"><b>{errors.abPositive}</b></Form.Control.Feedback>
+                            </Form.Group>
+                        </div>
+                        <div className="col-md-4">
+                            <Form.Group className="m-2" controlId="formBasicCampName">
+                                <Form.Label>AB-</Form.Label>
+                                <Form.Control type="text"
+                                    name='campName' onChange={this.changeHandlerABN} value={this.state.abNegative}
+                                    isValid={isValidABN} isInvalid={!!errors.abNegative} required />
+                                <Form.Control.Feedback ><b>Looks good!</b></Form.Control.Feedback>
+                                <Form.Control.Feedback type="invalid"><b>{errors.abNegative}</b></Form.Control.Feedback>
+                            </Form.Group>
+                        </div>
+                        <div className="col"></div>
+                    </div>
+                    <div className="row">
+                        <div className="col"></div>
+                        <div className="col-md-4">
+                            <Form.Group className="m-2" controlId="formBasicCampName">
+                                <Form.Label>O+</Form.Label>
+                                <Form.Control type="text"
+                                    name='campName' onChange={this.changeHandlerOP} value={this.state.opositive}
+                                    isValid={isValidOP} isInvalid={!!errors.opositive} required />
+                                <Form.Control.Feedback ><b>Looks good!</b></Form.Control.Feedback>
+                                <Form.Control.Feedback type="invalid"><b>{errors.opositive}</b></Form.Control.Feedback>
+                            </Form.Group>
+                        </div>
+                        <div className="col-md-4">
+                            <Form.Group className="m-2" controlId="formBasicCampName">
+                                <Form.Label>O-</Form.Label>
+                                <Form.Control type="text"
+                                    name='campName' onChange={this.changeHandlerON} value={this.state.onegative}
+                                    isValid={isValidON} isInvalid={!!errors.onegative} required />
+                                <Form.Control.Feedback ><b>Looks good!</b></Form.Control.Feedback>
+                                <Form.Control.Feedback type="invalid"><b>{errors.onegative}</b></Form.Control.Feedback>
+                            </Form.Group>
+                        </div>
+                        <div className="col"></div>
+                    </div>
+
+                    <div className="row">
+                        <div className="col ">
+
+                        </div>
+                        <div className="col-md-8 m-4">
+                            <Button variant="primary" type="submit" >Update</Button>
+                        </div>
+                        <div className="col ">
+
+                        </div>
+                    </div>
+                </Form>
+
+
+
+
             </div>
         )
     }

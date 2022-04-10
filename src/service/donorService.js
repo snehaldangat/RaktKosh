@@ -8,4 +8,8 @@ const getVerifyEmail = (email) => {
     return httpClient.get(`http://localhost:9090/donor/verifymobile/${mobile}`);
   };
 
-  export default { getVerifyEmail, getVerifyMobile};
+  const donorLogin=(email, password)=>{
+    return httpClient.get(`http://localhost:9090/donor/login/${email}/${password}`);
+  }
+
+  export default { getVerifyEmail, getVerifyMobile,donorLogin};
