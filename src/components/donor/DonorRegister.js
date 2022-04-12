@@ -4,7 +4,10 @@ import { Link } from 'react-router-dom';
 import axios from 'axios'
 import commonService from '../../service/common.service';
 import donorService from '../../service/donorService';
-import validator from 'validator'
+import validator from 'validator';
+import { toast } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
+import { Navigate } from "react-router-dom";
 class DonorRegister extends Component {
     constructor(props) {
         super(props)
@@ -617,6 +620,8 @@ class DonorRegister extends Component {
               console.log(response);
               //this.setState({citiesdata:response.data})
               console.log(response.data);
+              toast.success("Register Successfully!!");
+                this.setState({ redirect: '/donor/login' });
               })
               .catch(error=>{
                  console.log(error);
@@ -808,6 +813,9 @@ class DonorRegister extends Component {
       )
     }, this);
 
+    if (this.state.redirect) {
+      return  <Navigate to={this.state.redirect} />
+    }
 
     return (
 
@@ -955,8 +963,9 @@ class DonorRegister extends Component {
                         
                 </div>
                 <div className="col-md-8 m-2">
+               
                     <Button variant="primary" type="submit" >Register </Button>
-
+                 
                     <Link to="/donor/login">
                         <Button className="m-4" variant="danger">Already Registered ?</Button>
                     </Link> 

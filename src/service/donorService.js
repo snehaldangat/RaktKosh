@@ -12,4 +12,9 @@ const getVerifyEmail = (email) => {
     return httpClient.get(`http://localhost:9090/donor/login/${email}/${password}`);
   }
 
-  export default { getVerifyEmail, getVerifyMobile,donorLogin};
+  const getByEmail=(email)=>{
+    return httpClient.get(`http://localhost:9090/donor/${email}`);
+     
+  }
+
+  export default { getVerifyEmail, getVerifyMobile,donorLogin,getByEmail};

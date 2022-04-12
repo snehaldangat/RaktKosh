@@ -240,7 +240,7 @@ class Login extends Component {
             </div>
             <div className="p-3 m-2 bg-dark text-white col-5">
                 <Form noValidate onSubmit={this.handleSubmit} autoComplete="off">
-                    <h1>Welcome Blood Bank</h1><br />
+                    <h1>Login</h1><br />
                     <Form.Group className="m-2" controlId="formBasicEmail">
                         <Form.Label>E-Mail</Form.Label>
                         <Form.Control type="email" placeholder="Enter Email" name="email" onChange={this.emailHandler}

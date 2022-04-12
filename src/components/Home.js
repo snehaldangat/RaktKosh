@@ -24,7 +24,9 @@ export class Home extends Component {
       
      
       <>
-      
+      <div className="img" >
+     <img src="http://www.student.chula.ac.th/~60370416/images/banner.jpg" className="img"  ></img>
+     </div>
       <HomeTable /> 
       
 

@@ -2,32 +2,49 @@ import React, { Component } from "react";
 import axios from "axios";
 import { Form, Button, Table } from "react-bootstrap";
 import "../css/common.css";
-import commonService from "../../service/common.service";
+import donorService from "../../service/donorService";
 import { Link, Navigate } from "react-router-dom";
+import { render } from "@testing-library/react";
 
 class DonorHome extends Component {
-    constructor(props) {
+    constructor(props){
         super(props);
-
         this.state = {
-            bankdata: [],
+            donordata: [],
             loginUserEmail:'',
-            loginUserRole:'',
+            email:'',
             redirect:'',
-            data:'',
-            bank:'',
+            data:[],
+            donor:'',
             city:'',
-            apositive:sessionStorage.getItem("apositive"),
+            
         };
-       // this.stateHandler = this.stateHandler.bind(this);
     }
-     render(){
-        const {data,bank,city}=this.state;
-        //const {email} =this.state.data.bank;
-        console.log(city);
-        if (this.state.redirect) {
-            return  <Navigate to={this.state.redirect} />
-          }  
+    componentDidMount() {
+        const email=sessionStorage.getItem("loginUserEmail")
+        this.setState({
+            loginUserEmail: email,
+            
+        })
+        donorService.getByEmail(email)
+        .then((response) => {
+            console.log("componentDidMount");
+            console.log(response.data);
+            this.setState({data:response.data,
+            // donor:response.data.donor,
+            // city:response.data.donor.city
+
+            }) })
+            .catch((error) => {
+                console.log(error);
+            });
+
+    }
+
+    render(){
+        const {data,donor,city}=this.state;
+        //const {email} =this.state.data.donor;
+        console.log(data);
         return (
             <div>
                 <div className="container bg-dark text-white text-center mt-4 col-12">
@@ -56,15 +73,19 @@ class DonorHome extends Component {
                             
                             
                              <tbody>
+                             
                                 <tr>
-                                    <td>{bank.bankName}</td>
-                                    <td>{bank.parentHospital}</td>
-                                    <td>{bank.shortName}</td>
-                                    <td>{bank.category}</td>
-                                    <td>{bank.licence}</td>
-                                    <td>{city.name}</td>
-                                    <td>{bank.address}</td>
+                                <td>{data.firstName}</td>
+                                    <td>{data.lastName}</td>
+                                    <td>{data.email}</td>
+                                    <td>{data.birthDate}</td>
+                                    <td>{data.gender}</td>
+                                    <td>{data.mobile}</td>
+                                    
+                                   
+                                   
                                 </tr>
+                                
                             </tbody> 
                         </Table>
                     </div>
@@ -72,17 +93,23 @@ class DonorHome extends Component {
                     
                 </div>
                 
-                <div class="col-md-12 text-center">
+                <div className="col-md-12 text-center">
+                <Link to="/donor/donorAppointment">
+                <Button className="m-4" variant="primary">Donor Appointment</Button>
+              </Link>
                 <Link to="/">
-                <Button className="m-4"variant="primary" type="submit">
+                <Button className="m-4"variant="danger" type="submit">
                         Logout
                     </Button>
                     </Link>
                     </div>
             </div>
         );
-       }
-    
+       
+    }
 }
+    
+    
+
 
 export default DonorHome;

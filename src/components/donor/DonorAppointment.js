@@ -3,6 +3,7 @@ import { Form, Button } from "react-bootstrap";
 import { Link } from 'react-router-dom';
 import axios from 'axios'
 import validator from 'validator'
+import commonService from '../../service/common.service';
 class DonorAppointment extends Component {
   constructor(props) {
     super(props)
@@ -722,7 +723,8 @@ class DonorAppointment extends Component {
     if (this.state.statesdata.length === 0) {
 
       //http://localhost:9090/commondata/cities/39
-      axios.get('http://localhost:9090/commondata/statesAndDistrict')
+      //axios.get('http://localhost:9090/commondata/statesAndDistrict')
+      commonService.getAllStates()
         .then(response => {
           console.log("componentDidMount");
           console.log(response.data);
@@ -947,9 +949,10 @@ class DonorAppointment extends Component {
             <div className="col-md-8 m-2">
               <Button variant="primary" type="submit" >Submit</Button>
 
-              <Link to="/donor/home">
+              <Link to="/">
                 <Button className="m-4" variant="danger">Logout</Button>
               </Link>
+
             </div>
             <div className="col ">
 
